@@ -1,0 +1,40 @@
+package course4Week1Assignments;
+
+/**
+ * Stores and applies many filters.
+ * 
+ * @author Diane Wajslic 
+ * @version 1.0, February 2019
+ */
+
+import java.util.*;
+
+public class MatchAllFilter implements Filter{
+	private ArrayList<Filter> filters;
+	
+	public MatchAllFilter() {
+		filters = new ArrayList<Filter>();
+	}
+	
+	public void addFilter(Filter f) {
+		filters.add(f);
+	}
+	
+	public boolean satisfies(QuakeEntry qe) {
+		for(Filter f : filters) {
+			if(!f.satisfies(qe)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public String getName() {
+    	StringBuilder sb = new StringBuilder();
+    	for(Filter f : filters) {
+    		sb.append(f.getName() + " ");
+    	}
+    	return sb.toString();
+    }
+
+}
